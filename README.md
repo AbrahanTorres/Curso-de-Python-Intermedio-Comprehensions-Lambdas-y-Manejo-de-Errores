@@ -22,8 +22,6 @@ La puedes encontrar en español:
 
 Un Python aislado para cada proyecto, en el que puedes controlar las versiones y módulos instalados. Los módulos jamás se deben instalar en global, si no en entornos virtuales. Lo que pase dentro del virtual environment no afectará al Python global.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b793c063-85da-46a2-a88d-e86e2cb202df/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b793c063-85da-46a2-a88d-e86e2cb202df/Untitled.png)
-
 ## El primer paso profesional: creación de un entorno virtual
 
 - **code .** — abre VSCode en la carpeta que estás
@@ -155,7 +153,11 @@ Hay una forma de crear funciones sin nombre, anónimas. Se las conoce como lambd
 
 `lambda argumentos: expresión`
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6c6d8bbb-d9af-47c8-b195-77d277c61ea1/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6c6d8bbb-d9af-47c8-b195-77d277c61ea1/Untitled.png)
+```python
+palindrome = lambda string: string == string[::-1]
+
+print(palindrome("ana"))
+```
 
 No usa **return,** ya que por defecto guarda el resultado de la función anónima en la variable.
 
@@ -356,7 +358,6 @@ Este código filtra datos de una base de datos usando list comprehensions y las 
 
 Hay errores que Python te avisa que te equivocaste, devolviendo un traceback (rastreo). Los mensajes traceback se deben leer desde la última línea hasta la primera.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/70439581-1013-488b-8cc8-4a0d406b850b/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/70439581-1013-488b-8cc8-4a0d406b850b/Untitled.png)
 
 Si hay un SyntaxError, el programa no se va a ejecutar. Por otro lado, si son excepciones, sí se ejecutará.
 
@@ -380,21 +381,49 @@ Para esto hay algunas palabras clave:
 
 Cuando tengas un programa que es posible que haya algún error de excepción, por ejemplo en un formulario o en esta función 👇 que se deben ingresar strings, pero el usuario ingresó un number; puedes usar `try` para que intente ejecutar el programa. Y si hay un error, puedes poner debajo un `except error_name` y que el programa haga otra cosa para que no se dé el error. Si el error de excepción que se produce es diferente al que colocaste en el **except**, se producirá el error.
 
-![Aquí pones un except TypeError en caso de que te pongan un Type que no sea strings.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0bc8991c-1fda-408d-863a-891baf3bdb41/Untitled.png)
+```python
+def pailindrome(string):
+    return string == string[::-1]
+
+try:
+    print(pailindrome(1))
+except TypeError:
+    print("Solo se puede ingresar strings")
+```
 
 Aquí pones un except TypeError en caso de que te pongan un Type que no sea strings.
+
 
 ### Raise
 
 Eleva un error para en caso de que pase algo, lo invoque. En la definición se usa un try and except. En el try pon el error con un if (en este caso una cadena vacía) y luego convoca (eleva) un ValueError con `raise ValueError("mensaje")`. Y luego el return o la función como tal. En el except, vuelve a convocar el ValueError que creaste (el `as ve:` es una abreviación impuesta) y puedes hacer que se imprima el mensaje que pusiste y un return para la función:
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1c4a2ce3-4b51-4f83-ada1-4e5232d92595/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1c4a2ce3-4b51-4f83-ada1-4e5232d92595/Untitled.png)
+```python
+def pailindrome(string):
+    try:
+        if len(string) == 0:
+            raise ValueError("No se puede ingresar una cadena vacía")
+        return string == string[::-1]
+    except ValueError as ve:
+        print(ve)
+        return False
+try:
+    print(pailindrome(" "))
+except TypeError:
+    print("Solo se puede ingresar strings")
+```
 
 ### Finally
 
 Es rara de encontrar. Se la usa al final de un try except para hacer cosas particulares como cerrar un archivo, cerrar una conexión a una base de datos o liberar recursos externos.
 
-![Abre un archivo y finalmente, haya error o no, cierra el archivo (creo que de Python).](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b2ca4ee3-14bf-4a2c-ab3e-f52506f7796e/Untitled.png)
+```python
+try:
+    f = open("archivo.txt")
+    # hacer cualquier cosa con nuestro archivo
+finally:
+    f.close()
+```
 
 Abre un archivo y finalmente, haya error o no, cierra el archivo (creo que de Python).
 
@@ -431,11 +460,19 @@ Otra manera de manejar errores. Si bien es menos común que los anteriores, tamb
 
 Assert significa afirmar. Así que se lee: afirmo que esta condición es verdadera, si no, imprimo este mensaje de error.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4858c4fc-96c9-495b-8ba1-cbefb78db6b7/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4858c4fc-96c9-495b-8ba1-cbefb78db6b7/Untitled.png)
+```python
+assert condición, mensaje de error
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/66719098-0b32-462c-b5c4-a0da005cb432/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/66719098-0b32-462c-b5c4-a0da005cb432/Untitled.png)
+```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc8623be-a69f-4de3-a073-0cc8f7df638c/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc8623be-a69f-4de3-a073-0cc8f7df638c/Untitled.png)
+```python
+def palindrome(string):
+    assert len(string) > 0, "No se puede ingresar una cadena vacía"
+    return string == string[::-1]
+
+print(palindrome(""))
+
+```
 
 # 6. Manejo de archivos
 
@@ -449,13 +486,19 @@ Los binarios tienen dentro bytes que representan cosas muy complejas. Son archiv
 
 Hay 3 formas de abrir un archivo de texto con Python:
 
-![A es append. Estos son los modos de apertura.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1651d161-bb5c-4c30-a20f-c1c1c4c218af/Untitled.png)
+R -> Lectura
+W -> Escritura
+A -> Sobreescribir
 
 A es append. Estos son los modos de apertura.
 
 ### Estructura para trabajar con archivos
 
-![with + open('ruta', 'modo de apertura') as name: el nombre es como se va a llamar el archivo en el programa.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/16fb82ae-0a16-4e9a-a89e-b5117e36cfee/Untitled.png)
+```python
+
+with open("./ruta/del/archivo.txt", "r") as f:
+
+```
 
 with + open('ruta', 'modo de apertura') as name: el nombre es como se va a llamar el archivo en el programa.
 
@@ -490,5 +533,56 @@ def run():
     write()
 
 if __name__ == '__main__':
+    run()
+```
+
+# 7. Conclusión
+
+---
+
+## Reto final: Juego del Ahorcado o Hangman Game
+
+
+```python
+import random #This library permit to get random words from us data.txt list.
+import os
+
+def read_data(filepath="./archivos/data.txt"):
+    words = []
+    with open(filepath, "r", encoding="utf-8") as f:
+        for line in f:
+            words.append(line.strip().upper()) # ".strip()" Remove spaces at the beginning and at the end of the string. ".upper()" change each letter in capital letter.
+    return words
+
+def run():
+    data = read_data(filepath="./archivos/data.txt")
+    chosen_word = random.choice(data) #Here we chose the word randomly.
+    chosen_word_list = [letter for letter in chosen_word]
+    chosen_word_list_underscores = ["_"] * len(chosen_word_list) #Here we assing underscores to each letter of the chosen word.
+    letter_index_dict = {}
+    for idx, letter in enumerate(chosen_word):
+        if not letter_index_dict.get(letter):
+            letter_index_dict[letter] = []
+        letter_index_dict[letter].append(idx)
+
+    while True:
+        os.system("clear") #If you are in Unix Max or Linuex use clear, if you are in windoes use cls.
+        print("Guess a word!")
+        for element in chosen_word_list_underscores:
+            print(element + " ", end="")
+        print("\n")
+
+        letter = input("Write a letter: ").strip().upper()
+        assert letter.isalpha(), "Please, only use letters"
+
+        if letter in chosen_word_list:
+            for idx in letter_index_dict[letter]:
+                chosen_word_list_underscores[idx] = letter
+        if "_" not in chosen_word_list_underscores:
+            os.system("clear")
+            print("Yu WON! The word is", chosen_word)
+            break
+
+if __name__ == "__main__":
     run()
 ```
