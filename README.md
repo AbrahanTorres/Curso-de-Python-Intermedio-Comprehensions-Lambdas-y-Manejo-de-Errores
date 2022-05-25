@@ -566,7 +566,7 @@ def run():
         letter_index_dict[letter].append(idx)
 
     while True:
-        os.system("clear") #If you are in Unix Max or Linuex use clear, if you are in windoes use cls.
+        os.system("clear") #If you are in Unix Max or Linux use clear, if you are in windoes use cls.
         print("Guess a word!")
         for element in chosen_word_list_underscores:
             print(element + " ", end="")
